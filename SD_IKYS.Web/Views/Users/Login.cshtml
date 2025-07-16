@@ -1,0 +1,58 @@
+@model SD_IKYS.Web.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Giriş";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="card shadow">
+            <div class="card-header text-center">
+                <h3 class="mb-0">
+                    <i class="fas fa-user-circle text-primary"></i>
+                    SD IKYS Giriş
+                </h3>
+            </div>
+            <div class="card-body">
+                <form asp-action="Login" method="post">
+                    <div class="mb-3">
+                        <label asp-for="Username" class="form-label">Kullanıcı Adı</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="fas fa-user"></i>
+                            </span>
+                            <input asp-for="Username" class="form-control" placeholder="Kullanıcı adınızı giriniz" />
+                        </div>
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Password" class="form-label">Şifre</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Şifrenizi giriniz" />
+                        </div>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-sign-in-alt"></i> Giriş Yap
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <small class="text-muted">
+                    SD IKYS - İnsan Kaynakları Yönetim Sistemi
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

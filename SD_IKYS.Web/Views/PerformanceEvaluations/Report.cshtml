@@ -1,0 +1,83 @@
+@model SD_IKYS.Web.Models.PerformanceReportViewModel
+
+@{
+    ViewData["Title"] = "Performans Değerlendirme Raporu";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Performans Değerlendirme Raporu</h2>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Geri
+    </a>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Toplam Değerlendirme</h5>
+                <h2 class="card-text">@Model.TotalEvaluations</h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Ortalama Puan</h5>
+                <h2 class="card-text">@Model.AverageScore.ToString("F2")</h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Yüksek Performanslı</h5>
+                <h2 class="card-text">@Model.HighPerformers</h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Bu Ay</h5>
+                <h2 class="card-text">@Model.ThisMonth</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title mb-0">En Yüksek Puanlı Çalışanlar</h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Personel</th>
+                        <th>Puan</th>
+                        <th>Değerlendirme Dönemi</th>
+                        <th>Tarih</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var topPerformer in Model.TopPerformers)
+                    {
+                        <tr>
+                            <td>@topPerformer.EmployeeName</td>
+                            <td>
+                                <span class="badge bg-success">@topPerformer.Score</span>
+                            </td>
+                            <td>@topPerformer.Period</td>
+                            <td>@topPerformer.Date.ToString("dd.MM.yyyy")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 

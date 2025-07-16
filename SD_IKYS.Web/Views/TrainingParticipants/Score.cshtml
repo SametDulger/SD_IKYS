@@ -1,0 +1,54 @@
+@model SD_IKYS.Web.Models.TrainingParticipantScoreViewModel
+
+@{
+    ViewData["Title"] = "Eğitim Puanlama";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Eğitim Puanlama</h2>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Geri
+    </a>
+</div>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Score" method="post">
+            <input type="hidden" asp-for="Id" />
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="Score" class="form-label">Puan (0-100)</label>
+                        <input asp-for="Score" class="form-control" type="number" min="0" max="100" step="0.1" />
+                        <span asp-validation-for="Score" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label asp-for="Comments" class="form-label">Yorumlar</label>
+                <textarea asp-for="Comments" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Comments" class="text-danger"></span>
+            </div>
+            
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Puanla
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

@@ -1,0 +1,45 @@
+@model SD_IKYS.Web.Models.LeaveRequestApprovalViewModel
+
+@{
+    ViewData["Title"] = "İzin Onaylama";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>İzin Onaylama</h2>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Geri
+    </a>
+</div>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Approve" method="post">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Status" value="Approved" />
+            
+            <div class="mb-3">
+                <label asp-for="Comments" class="form-label">Onay Notları</label>
+                <textarea asp-for="Comments" class="form-control" rows="3" placeholder="Onay notlarınızı buraya yazın..."></textarea>
+                <span asp-validation-for="Comments" class="text-danger"></span>
+            </div>
+            
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-check"></i> Onayla
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

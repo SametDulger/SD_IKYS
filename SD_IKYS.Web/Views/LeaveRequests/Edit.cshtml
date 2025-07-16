@@ -1,0 +1,82 @@
+@model SD_IKYS.Web.Models.LeaveRequestEditViewModel
+
+@{
+    ViewData["Title"] = "İzin Talebi Düzenle";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>İzin Talebi Düzenle</h2>
+    <a asp-action="Index" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Geri Dön
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="EmployeeId" class="form-label">Personel *</label>
+                        <select asp-for="EmployeeId" class="form-select">
+                            <option value="">Personel Seçiniz</option>
+                        </select>
+                        <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="LeaveType" class="form-label">İzin Türü *</label>
+                        <select asp-for="LeaveType" class="form-select">
+                            <option value="">İzin Türü Seçiniz</option>
+                            <option value="Yıllık İzin">Yıllık İzin</option>
+                            <option value="Hastalık İzni">Hastalık İzni</option>
+                            <option value="Mazeret İzni">Mazeret İzni</option>
+                            <option value="Ücretsiz İzin">Ücretsiz İzin</option>
+                        </select>
+                        <span asp-validation-for="LeaveType" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="StartDate" class="form-label">Başlangıç Tarihi *</label>
+                        <input asp-for="StartDate" type="date" class="form-control" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="EndDate" class="form-label">Bitiş Tarihi *</label>
+                        <input asp-for="EndDate" type="date" class="form-control" />
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label asp-for="Reason" class="form-label">İzin Nedeni</label>
+                        <textarea asp-for="Reason" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="Reason" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Güncelle
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 
