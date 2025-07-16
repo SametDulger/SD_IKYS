@@ -1,0 +1,92 @@
+@model IEnumerable<SD_IKYS.Web.Models.TrainingViewModel>
+
+@{
+    ViewData["Title"] = "Eğitimler";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Eğitimler</h2>
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Yeni Eğitim
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Başlık</th>
+                        <th>Eğitmen</th>
+                        <th>Başlangıç</th>
+                        <th>Bitiş</th>
+                        <th>Konum</th>
+                        <th>Katılımcı</th>
+                        <th>Durum</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Title</td>
+                                <td>@item.Trainer</td>
+                                <td>@item.StartDate.ToShortDateString()</td>
+                                <td>@item.EndDate.ToShortDateString()</td>
+                                <td>@item.Location</td>
+                                <td>
+                                    <span class="badge bg-info">@item.CurrentParticipants/@item.MaxParticipants</span>
+                                </td>
+                                <td>
+                                    @switch (item.Status?.ToLower())
+                                    {
+                                        case "active":
+                                            <span class="badge bg-success">Aktif</span>
+                                            break;
+                                        case "completed":
+                                            <span class="badge bg-secondary">Tamamlandı</span>
+                                            break;
+                                        case "cancelled":
+                                            <span class="badge bg-danger">İptal</span>
+                                            break;
+                                        case "upcoming":
+                                            <span class="badge bg-warning">Yaklaşan</span>
+                                            break;
+                                        default:
+                                            <span class="badge bg-secondary">@item.Status</span>
+                                            break;
+                                    }
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="9" class="text-center">Henüz eğitim bulunmamaktadır.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 

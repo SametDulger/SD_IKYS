@@ -1,0 +1,75 @@
+@model SD_IKYS.Web.Models.EmployeeViewModel
+
+@{
+    ViewData["Title"] = "Personel Detayları";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Personel Detayları</h2>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+            <i class="fas fa-edit"></i> Düzenle
+        </a>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Geri Dön
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">ID:</dt>
+                    <dd class="col-sm-8">@Model.Id</dd>
+
+                    <dt class="col-sm-4">TCKN:</dt>
+                    <dd class="col-sm-8">@Model.TCKN</dd>
+
+                    <dt class="col-sm-4">Ad:</dt>
+                    <dd class="col-sm-8">@Model.FirstName</dd>
+
+                    <dt class="col-sm-4">Soyad:</dt>
+                    <dd class="col-sm-8">@Model.LastName</dd>
+
+                    <dt class="col-sm-4">E-posta:</dt>
+                    <dd class="col-sm-8">@Model.Email</dd>
+
+                    <dt class="col-sm-4">Telefon:</dt>
+                    <dd class="col-sm-8">@Model.PhoneNumber</dd>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">Pozisyon:</dt>
+                    <dd class="col-sm-8">@Model.Position</dd>
+
+                    <dt class="col-sm-4">Departman:</dt>
+                    <dd class="col-sm-8">@Model.Department</dd>
+
+                    <dt class="col-sm-4">İşe Başlama:</dt>
+                    <dd class="col-sm-8">@Model.HireDate.ToShortDateString()</dd>
+
+                    <dt class="col-sm-4">Doğum Tarihi:</dt>
+                    <dd class="col-sm-8">@Model.BirthDate.ToShortDateString()</dd>
+
+                    <dt class="col-sm-4">Maaş:</dt>
+                    <dd class="col-sm-8">@Model.Salary.ToString("C")</dd>
+
+                    <dt class="col-sm-4">Durum:</dt>
+                    <dd class="col-sm-8">
+                        @if (Model.IsActive)
+                        {
+                            <span class="badge bg-success">Aktif</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Pasif</span>
+                        }
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div> 

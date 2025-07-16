@@ -1,0 +1,95 @@
+@model SD_IKYS.Web.Models.PerformanceEvaluationViewModel
+
+@{
+    ViewData["Title"] = "Performans Değerlendirme Detayları";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Performans Değerlendirme Detayları</h2>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+            <i class="fas fa-edit"></i> Düzenle
+        </a>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Geri Dön
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">ID:</dt>
+                    <dd class="col-sm-8">@Model.Id</dd>
+                    <dt class="col-sm-4">Personel:</dt>
+                    <dd class="col-sm-8">@Model.EmployeeName</dd>
+                    <dt class="col-sm-4">Değerlendirici:</dt>
+                    <dd class="col-sm-8">@Model.EvaluatorName</dd>
+                    <dt class="col-sm-4">Dönem:</dt>
+                    <dd class="col-sm-8">@Model.EvaluationPeriod</dd>
+                    <dt class="col-sm-4">Değerlendirme Tarihi:</dt>
+                    <dd class="col-sm-8">@Model.EvaluationDate.ToShortDateString()</dd>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">İş Kalitesi:</dt>
+                    <dd class="col-sm-8">@Model.WorkQuality</dd>
+                    <dt class="col-sm-4">Verimlilik:</dt>
+                    <dd class="col-sm-8">@Model.Productivity</dd>
+                    <dt class="col-sm-4">Takım Çalışması:</dt>
+                    <dd class="col-sm-8">@Model.Teamwork</dd>
+                    <dt class="col-sm-4">İletişim:</dt>
+                    <dd class="col-sm-8">@Model.Communication</dd>
+                    <dt class="col-sm-4">İnisiyatif:</dt>
+                    <dd class="col-sm-8">@Model.Initiative</dd>
+                    <dt class="col-sm-4">Genel Puan:</dt>
+                    <dd class="col-sm-8">@Model.OverallScore</dd>
+                </dl>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <dl class="row">
+                    <dt class="col-sm-6">Güçlü Yönler:</dt>
+                    <dd class="col-sm-6">@Model.Strengths</dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl class="row">
+                    <dt class="col-sm-6">Gelişim Alanları:</dt>
+                    <dd class="col-sm-6">@Model.AreasForImprovement</dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl class="row">
+                    <dt class="col-sm-6">Hedefler:</dt>
+                    <dd class="col-sm-6">@Model.Goals</dd>
+                </dl>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12">
+                <dl class="row">
+                    <dt class="col-sm-2">Durum:</dt>
+                    <dd class="col-sm-10">
+                        @if (Model.Status == "Completed")
+                        {
+                            <span class="badge bg-success">Tamamlandı</span>
+                        }
+                        else if (Model.Status == "Draft")
+                        {
+                            <span class="badge bg-warning">Taslak</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">@Model.Status</span>
+                        }
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div> 

@@ -1,0 +1,52 @@
+@model IEnumerable<SD_IKYS.Web.Models.TrainingViewModel>
+
+@{
+    ViewData["Title"] = "Aktif Eğitimler";
+}
+
+<h2>Aktif Eğitimler</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Başlık</th>
+            <th>Eğitim Türü</th>
+            <th>Eğitmen</th>
+            <th>Başlangıç</th>
+            <th>Bitiş</th>
+            <th>Konum</th>
+            <th>Durum</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var training in Model)
+    {
+        <tr>
+            <td>@training.Title</td>
+            <td>@training.TrainingType</td>
+            <td>@training.Trainer</td>
+            <td>@training.StartDate.ToString("dd.MM.yyyy")</td>
+            <td>@training.EndDate.ToString("dd.MM.yyyy")</td>
+            <td>@training.Location</td>
+            <td>
+                @if (training.Status == "Active")
+                {
+                    <span class="badge bg-success">Aktif</span>
+                }
+                else if (training.Status == "In Progress")
+                {
+                    <span class="badge bg-info">Devam Ediyor</span>
+                }
+                else
+                {
+                    <span class="badge bg-secondary">@training.Status</span>
+                }
+            </td>
+            <td>
+                <a href="@Url.Action("Details", "Trainings", new { id = training.Id })" class="btn btn-info btn-sm">Detay</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table> 

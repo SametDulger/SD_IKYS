@@ -1,0 +1,39 @@
+@model IEnumerable<SD_IKYS.Web.Models.LeaveRequestViewModel>
+
+@{
+    ViewData["Title"] = "Bekleyen İzin Talepleri";
+}
+
+<h2>Bekleyen İzin Talepleri</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Personel</th>
+            <th>İzin Türü</th>
+            <th>Başlangıç</th>
+            <th>Bitiş</th>
+            <th>Sebep</th>
+            <th>Durum</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var request in Model)
+    {
+        <tr>
+            <td>@request.EmployeeName</td>
+            <td>@request.LeaveType</td>
+            <td>@request.StartDate.ToString("dd.MM.yyyy")</td>
+            <td>@request.EndDate.ToString("dd.MM.yyyy")</td>
+            <td>@request.Reason</td>
+            <td>
+                <span class="badge bg-warning">Bekliyor</span>
+            </td>
+            <td>
+                <a href="@Url.Action("Details", "LeaveRequests", new { id = request.Id })" class="btn btn-info btn-sm">Detay</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table> 

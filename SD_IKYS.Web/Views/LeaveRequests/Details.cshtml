@@ -1,0 +1,85 @@
+@model SD_IKYS.Web.Models.LeaveRequestViewModel
+
+@{
+    ViewData["Title"] = "İzin Talebi Detayları";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>İzin Talebi Detayları</h2>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+            <i class="fas fa-edit"></i> Düzenle
+        </a>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Geri Dön
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">ID:</dt>
+                    <dd class="col-sm-8">@Model.Id</dd>
+
+                    <dt class="col-sm-4">Personel:</dt>
+                    <dd class="col-sm-8">@Model.EmployeeName</dd>
+
+                    <dt class="col-sm-4">İzin Türü:</dt>
+                    <dd class="col-sm-8">@Model.LeaveType</dd>
+
+                    <dt class="col-sm-4">Başlangıç:</dt>
+                    <dd class="col-sm-8">@Model.StartDate.ToShortDateString()</dd>
+
+                    <dt class="col-sm-4">Bitiş:</dt>
+                    <dd class="col-sm-8">@Model.EndDate.ToShortDateString()</dd>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">Durum:</dt>
+                    <dd class="col-sm-8">
+                        @switch (Model.Status?.ToLower())
+                        {
+                            case "pending":
+                                <span class="badge bg-warning">Bekliyor</span>
+                                break;
+                            case "approved":
+                                <span class="badge bg-success">Onaylandı</span>
+                                break;
+                            case "rejected":
+                                <span class="badge bg-danger">Reddedildi</span>
+                                break;
+                            default:
+                                <span class="badge bg-secondary">@Model.Status</span>
+                                break;
+                        }
+                    </dd>
+
+                    <dt class="col-sm-4">Onaylayan:</dt>
+                    <dd class="col-sm-8">@Model.ApproverName</dd>
+
+                    <dt class="col-sm-4">Onay Tarihi:</dt>
+                    <dd class="col-sm-8">@(Model.ApprovalDate?.ToShortDateString() ?? "-")</dd>
+
+                    <dt class="col-sm-4">Onay Notu:</dt>
+                    <dd class="col-sm-8">@Model.ApprovalNotes</dd>
+                </dl>
+            </div>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.Reason))
+        {
+            <div class="row mt-3">
+                <div class="col-12">
+                    <dl class="row">
+                        <dt class="col-sm-2">İzin Nedeni:</dt>
+                        <dd class="col-sm-10">@Model.Reason</dd>
+                    </dl>
+                </div>
+            </div>
+        }
+    </div>
+</div> 

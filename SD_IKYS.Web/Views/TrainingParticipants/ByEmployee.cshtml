@@ -1,0 +1,61 @@
+@model IEnumerable<SD_IKYS.Web.Models.TrainingParticipantViewModel>
+
+@{
+    ViewData["Title"] = $"Personel Eğitimleri: {ViewBag.EmployeeName}";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>@ViewBag.EmployeeName - Eğitimleri</h2>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Geri
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Eğitim</th>
+                        <th>Durum</th>
+                        <th>Puan</th>
+                        <th>Tamamlanma Tarihi</th>
+                        <th>Sertifika No</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var participant in Model)
+                    {
+                        <tr>
+                            <td>@participant.TrainingTitle</td>
+                            <td>
+                                @if (participant.Status == "Completed")
+                                {
+                                    <span class="badge bg-success">Tamamlandı</span>
+                                }
+                                else if (participant.Status == "In Progress")
+                                {
+                                    <span class="badge bg-warning">Devam Ediyor</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">@participant.Status</span>
+                                }
+                            </td>
+                            <td>@(participant.Score?.ToString() ?? "-")</td>
+                            <td>@(participant.CompletionDate?.ToString("dd.MM.yyyy") ?? "-")</td>
+                            <td>@participant.CertificateNumber</td>
+                            <td>
+                                <a href="@Url.Action("Details", new { id = participant.Id })" class="btn btn-sm btn-info">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 

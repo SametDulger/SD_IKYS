@@ -1,0 +1,58 @@
+@model IEnumerable<SD_IKYS.Web.Models.PerformanceEvaluationViewModel>
+
+@{
+    ViewData["Title"] = "Yüksek Performanslı Çalışanlar";
+}
+
+<h2>Yüksek Performanslı Çalışanlar</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Personel</th>
+            <th>Değerlendirme Dönemi</th>
+            <th>Genel Puan</th>
+            <th>İş Kalitesi</th>
+            <th>Verimlilik</th>
+            <th>Takım Çalışması</th>
+            <th>İletişim</th>
+            <th>İnisiyatif</th>
+            <th>Durum</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var evaluation in Model)
+    {
+        <tr>
+            <td>@evaluation.EmployeeName</td>
+            <td>@evaluation.EvaluationPeriod</td>
+            <td>
+                <span class="badge bg-success">@evaluation.OverallScore</span>
+            </td>
+            <td>@evaluation.WorkQuality</td>
+            <td>@evaluation.Productivity</td>
+            <td>@evaluation.Teamwork</td>
+            <td>@evaluation.Communication</td>
+            <td>@evaluation.Initiative</td>
+            <td>
+                @if (evaluation.Status == "Completed")
+                {
+                    <span class="badge bg-success">Tamamlandı</span>
+                }
+                else if (evaluation.Status == "In Progress")
+                {
+                    <span class="badge bg-warning">Devam Ediyor</span>
+                }
+                else
+                {
+                    <span class="badge bg-secondary">@evaluation.Status</span>
+                }
+            </td>
+            <td>
+                <a href="@Url.Action("Details", "PerformanceEvaluations", new { id = evaluation.Id })" class="btn btn-info btn-sm">Detay</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table> 

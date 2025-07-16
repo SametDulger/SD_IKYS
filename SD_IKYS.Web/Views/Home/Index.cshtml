@@ -1,0 +1,166 @@
+﻿@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<div class="text-center">
+    <h1 class="display-4">SD IKYS - İnsan Kaynakları Yönetim Sistemi</h1>
+    <p class="lead">Personel yönetimi, izin takibi, performans değerlendirmesi ve eğitim yönetimi için kapsamlı çözüm.</p>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-3">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title">Toplam Personel</h5>
+                        <h2 class="card-text">@(ViewBag.DashboardData?.TotalEmployees ?? 0)</h2>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-users fa-2x"></i>
+                    </div>
+                </div>
+                <a href="@Url.Action("Index", "Employees")" class="btn btn-outline-light btn-sm">Detaylar</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title">Aktif Personel</h5>
+                        <h2 class="card-text">@(ViewBag.DashboardData?.ActiveEmployees ?? 0)</h2>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-user-check fa-2x"></i>
+                    </div>
+                </div>
+                <a href="@Url.Action("Active", "Employees")" class="btn btn-outline-light btn-sm">Detaylar</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title">Bekleyen İzinler</h5>
+                        <h2 class="card-text">@(ViewBag.DashboardData?.PendingLeaveRequests ?? 0)</h2>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-clock fa-2x"></i>
+                    </div>
+                </div>
+                <a href="@Url.Action("Pending", "LeaveRequests")" class="btn btn-outline-light btn-sm">Detaylar</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title">Aktif Eğitimler</h5>
+                        <h2 class="card-text">@(ViewBag.DashboardData?.ActiveTrainings ?? 0)</h2>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-graduation-cap fa-2x"></i>
+                    </div>
+                </div>
+                <a href="@Url.Action("Active", "Trainings")" class="btn btn-outline-light btn-sm">Detaylar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Hızlı İşlemler</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <a href="@Url.Action("Create", "Employees")" class="btn btn-primary btn-lg w-100 mb-2">
+                            <i class="fas fa-user-plus"></i><br>
+                            Yeni Personel
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="@Url.Action("Create", "LeaveRequests")" class="btn btn-warning btn-lg w-100 mb-2">
+                            <i class="fas fa-calendar-plus"></i><br>
+                            İzin Talebi
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="@Url.Action("Create", "PerformanceEvaluations")" class="btn btn-success btn-lg w-100 mb-2">
+                            <i class="fas fa-chart-line"></i><br>
+                            Performans Değerlendirmesi
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="@Url.Action("Create", "Trainings")" class="btn btn-info btn-lg w-100 mb-2">
+                            <i class="fas fa-chalkboard-teacher"></i><br>
+                            Yeni Eğitim
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Sistem Bilgileri</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Toplam Kullanıcı</span>
+                        <span class="badge bg-primary rounded-pill">@(ViewBag.DashboardData?.TotalEmployees ?? 0)</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Aktif Kullanıcı</span>
+                        <span class="badge bg-success rounded-pill">@(ViewBag.DashboardData?.ActiveEmployees ?? 0)</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Bekleyen İzin Talepleri</span>
+                        <span class="badge bg-warning rounded-pill">@(ViewBag.DashboardData?.PendingLeaveRequests ?? 0)</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Aktif Eğitimler</span>
+                        <span class="badge bg-info rounded-pill">@(ViewBag.DashboardData?.ActiveTrainings ?? 0)</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Son Değerlendirmeler</span>
+                        <span class="badge bg-secondary rounded-pill">@(ViewBag.DashboardData?.RecentEvaluations ?? 0)</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Son Aktiviteler</h5>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    Sistem henüz başlatılmamış. İlk verilerinizi eklemek için yukarıdaki hızlı işlem butonlarını kullanabilirsiniz.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

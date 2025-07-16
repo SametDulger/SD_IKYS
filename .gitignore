@@ -1,0 +1,57 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Visual Studio Code
+.vscode/
+
+# Rider
+.idea/
+*.sln.iml
+
+# Logs
+*.log
+
+# Database
+*.mdf
+*.ldf
+*.db
+*.bak
+
+# Publish
+publish/
+
+# Test results
+TestResults/
+
+# Secret files
+*.pfx
+*.key
+*.env
+
+# Libman cache
+wwwroot/libman.json.cache
+
+# Migration snapshots (optional, keep if you want to version them)
+#SD_IKYS.Data/Migrations/
+
+# Others
+*.vspscc
+*.vssscc
+
+# npm
+node_modules/
+
+# NuGet
+*.nupkg
+packages/ 

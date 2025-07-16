@@ -1,0 +1,128 @@
+@model SD_IKYS.Web.Models.PerformanceEvaluationEditViewModel
+
+@{
+    ViewData["Title"] = "Performans Değerlendirmesi Düzenle";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Performans Değerlendirmesi Düzenle</h2>
+    <a asp-action="Index" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Geri Dön
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="EmployeeId" class="form-label">Personel *</label>
+                        <select asp-for="EmployeeId" class="form-select">
+                            <option value="">Personel Seçiniz</option>
+                        </select>
+                        <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="EvaluatorId" class="form-label">Değerlendirici *</label>
+                        <select asp-for="EvaluatorId" class="form-select">
+                            <option value="">Değerlendirici Seçiniz</option>
+                        </select>
+                        <span asp-validation-for="EvaluatorId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="EvaluationDate" class="form-label">Değerlendirme Tarihi *</label>
+                        <input asp-for="EvaluationDate" type="date" class="form-control" />
+                        <span asp-validation-for="EvaluationDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="EvaluationPeriod" class="form-label">Dönem *</label>
+                        <input asp-for="EvaluationPeriod" class="form-control" />
+                        <span asp-validation-for="EvaluationPeriod" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label asp-for="WorkQuality" class="form-label">İş Kalitesi *</label>
+                        <input asp-for="WorkQuality" type="number" step="0.01" class="form-control" />
+                        <span asp-validation-for="WorkQuality" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label asp-for="Productivity" class="form-label">Verimlilik *</label>
+                        <input asp-for="Productivity" type="number" step="0.01" class="form-control" />
+                        <span asp-validation-for="Productivity" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label asp-for="Teamwork" class="form-label">Takım Çalışması *</label>
+                        <input asp-for="Teamwork" type="number" step="0.01" class="form-control" />
+                        <span asp-validation-for="Teamwork" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label asp-for="Communication" class="form-label">İletişim *</label>
+                        <input asp-for="Communication" type="number" step="0.01" class="form-control" />
+                        <span asp-validation-for="Communication" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label asp-for="Initiative" class="form-label">İnisiyatif *</label>
+                        <input asp-for="Initiative" type="number" step="0.01" class="form-control" />
+                        <span asp-validation-for="Initiative" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="Strengths" class="form-label">Güçlü Yönler</label>
+                        <textarea asp-for="Strengths" class="form-control" rows="2"></textarea>
+                        <span asp-validation-for="Strengths" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="AreasForImprovement" class="form-label">Gelişim Alanları</label>
+                        <textarea asp-for="AreasForImprovement" class="form-control" rows="2"></textarea>
+                        <span asp-validation-for="AreasForImprovement" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label asp-for="Goals" class="form-label">Hedefler</label>
+                        <textarea asp-for="Goals" class="form-control" rows="2"></textarea>
+                        <span asp-validation-for="Goals" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Güncelle
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

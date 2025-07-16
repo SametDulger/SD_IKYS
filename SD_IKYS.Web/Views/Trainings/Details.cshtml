@@ -1,0 +1,69 @@
+@model SD_IKYS.Web.Models.TrainingViewModel
+
+@{
+    ViewData["Title"] = "Eğitim Detayları";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Eğitim Detayları</h2>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+            <i class="fas fa-edit"></i> Düzenle
+        </a>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Geri Dön
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">ID:</dt>
+                    <dd class="col-sm-8">@Model.Id</dd>
+                    <dt class="col-sm-4">Başlık:</dt>
+                    <dd class="col-sm-8">@Model.Title</dd>
+                    <dt class="col-sm-4">Eğitim Türü:</dt>
+                    <dd class="col-sm-8">@Model.TrainingType</dd>
+                    <dt class="col-sm-4">Başlangıç:</dt>
+                    <dd class="col-sm-8">@Model.StartDate.ToShortDateString()</dd>
+                    <dt class="col-sm-4">Bitiş:</dt>
+                    <dd class="col-sm-8">@Model.EndDate.ToShortDateString()</dd>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">Eğitmen:</dt>
+                    <dd class="col-sm-8">@Model.Trainer</dd>
+                    <dt class="col-sm-4">Konum:</dt>
+                    <dd class="col-sm-8">@Model.Location</dd>
+                    <dt class="col-sm-4">Maksimum Katılımcı:</dt>
+                    <dd class="col-sm-8">@Model.MaxParticipants</dd>
+                    <dt class="col-sm-4">Açıklama:</dt>
+                    <dd class="col-sm-8">@Model.Description</dd>
+                    <dt class="col-sm-4">Durum:</dt>
+                    <dd class="col-sm-8">
+                        @if (Model.Status == "Active")
+                        {
+                            <span class="badge bg-success">Aktif</span>
+                        }
+                        else if (Model.Status == "Completed")
+                        {
+                            <span class="badge bg-secondary">Tamamlandı</span>
+                        }
+                        else if (Model.Status == "Cancelled")
+                        {
+                            <span class="badge bg-danger">İptal</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning">@Model.Status</span>
+                        }
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div> 

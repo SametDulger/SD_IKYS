@@ -1,0 +1,66 @@
+@model SD_IKYS.Web.Models.RoleViewModel
+
+@{
+    ViewData["Title"] = "Rol Detayları";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Rol Detayları</h2>
+    <div>
+        <a href="@Url.Action("Edit", new { id = Model.Id })" class="btn btn-warning">
+            <i class="fas fa-edit"></i> Düzenle
+        </a>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Geri
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">ID:</dt>
+                    <dd class="col-sm-8">@Model.Id</dd>
+                    
+                    <dt class="col-sm-4">Rol Adı:</dt>
+                    <dd class="col-sm-8">@Model.Name</dd>
+                    
+                    <dt class="col-sm-4">Açıklama:</dt>
+                    <dd class="col-sm-8">@Model.Description</dd>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">Oluşturulma Tarihi:</dt>
+                    <dd class="col-sm-8">@Model.CreatedDate.ToString("dd.MM.yyyy HH:mm")</dd>
+                    
+                    <dt class="col-sm-4">Güncellenme Tarihi:</dt>
+                    <dd class="col-sm-8">
+                        @if (Model.UpdatedDate.HasValue)
+                        {
+                            @Model.UpdatedDate.Value.ToString("dd.MM.yyyy HH:mm")
+                        }
+                        else
+                        {
+                            <span class="text-muted">Güncellenmemiş</span>
+                        }
+                    </dd>
+                    
+                    <dt class="col-sm-4">Durum:</dt>
+                    <dd class="col-sm-8">
+                        @if (Model.IsActive)
+                        {
+                            <span class="badge bg-success">Aktif</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Pasif</span>
+                        }
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div> 

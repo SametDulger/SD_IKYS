@@ -1,0 +1,46 @@
+@model IEnumerable<SD_IKYS.Web.Models.EmployeeViewModel>
+
+@{
+    ViewData["Title"] = "Aktif Personel";
+}
+
+<h2>Aktif Personel</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Pozisyon</th>
+            <th>Bölüm</th>
+            <th>Email</th>
+            <th>Durum</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var employee in Model)
+    {
+        <tr>
+            <td>@employee.FirstName</td>
+            <td>@employee.LastName</td>
+            <td>@employee.Position</td>
+            <td>@employee.Department</td>
+            <td>@employee.Email</td>
+            <td>
+                @if (employee.IsActive)
+                {
+                    <span class="badge bg-success">Aktif</span>
+                }
+                else
+                {
+                    <span class="badge bg-danger">Pasif</span>
+                }
+            </td>
+            <td>
+                <a href="@Url.Action("Details", "Employees", new { id = employee.Id })" class="btn btn-info btn-sm">Detay</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table> 
