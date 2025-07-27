@@ -62,6 +62,12 @@ nunit-*.xml
 # Libman cache
 wwwroot/libman.json.cache
 
+# Client-side libraries (auto-restored by LibMan)
+
+wwwroot/lib/
+lib/
+**/lib/
+
 # Entity Framework Migrations
 **/Migrations/
 
