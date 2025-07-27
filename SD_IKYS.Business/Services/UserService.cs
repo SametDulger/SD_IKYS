@@ -6,12 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace SD_IKYS.Business.Services
 {
     public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly PasswordHasher<User> _passwordHasher = new PasswordHasher<User>();
 
         public UserService(IUnitOfWork unitOfWork)
         {
@@ -24,7 +26,7 @@ namespace SD_IKYS.Business.Services
             return users.Select(MapToDto);
         }
 
-        public async Task<UserDto> GetByIdAsync(int id)
+        public async Task<UserDto?> GetByIdAsync(int id)
         {
             var user = await _unitOfWork.Users.GetByIdAsync(id);
             return user != null ? MapToDto(user) : null;
@@ -42,7 +44,6 @@ namespace SD_IKYS.Business.Services
             {
                 Username = createUserDto.Username,
                 Email = createUserDto.Email,
-                Password = createUserDto.Password, // In real app, hash the password
                 FirstName = createUserDto.FirstName,
                 LastName = createUserDto.LastName,
                 PhoneNumber = createUserDto.PhoneNumber,
@@ -50,6 +51,7 @@ namespace SD_IKYS.Business.Services
                 CreatedDate = DateTime.UtcNow,
                 IsActive = true
             };
+            user.Password = _passwordHasher.HashPassword(user, createUserDto.Password);
 
             await _unitOfWork.Users.AddAsync(user);
             await _unitOfWork.SaveChangesAsync();
@@ -95,10 +97,10 @@ namespace SD_IKYS.Business.Services
             return true;
         }
 
-        public async Task<UserDto> AuthenticateAsync(LoginDto loginDto)
+        public async Task<UserDto?> AuthenticateAsync(LoginDto loginDto)
         {
             var user = await _unitOfWork.Users.GetByUsernameAsync(loginDto.Username);
-            if (user == null || user.Password != loginDto.Password || !user.IsActive)
+            if (user == null || _passwordHasher.VerifyHashedPassword(user, user.Password, loginDto.Password) != PasswordVerificationResult.Success || !user.IsActive)
                 return null;
 
             return MapToDto(user);
@@ -125,7 +127,7 @@ namespace SD_IKYS.Business.Services
                 LastName = user.LastName,
                 PhoneNumber = user.PhoneNumber,
                 RoleId = user.RoleId,
-                RoleName = user.Role?.Name,
+                RoleName = user.Role?.Name ?? string.Empty,
                 IsActive = user.IsActive
             };
         }

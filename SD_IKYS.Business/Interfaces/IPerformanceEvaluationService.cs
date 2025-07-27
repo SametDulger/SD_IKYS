@@ -8,7 +8,7 @@ namespace SD_IKYS.Business.Interfaces
     public interface IPerformanceEvaluationService
     {
         Task<IEnumerable<PerformanceEvaluationDto>> GetAllAsync();
-        Task<PerformanceEvaluationDto> GetByIdAsync(int id);
+        Task<PerformanceEvaluationDto?> GetByIdAsync(int id);
         Task<PerformanceEvaluationDto> CreateAsync(CreatePerformanceEvaluationDto createDto);
         Task<PerformanceEvaluationDto> UpdateAsync(int id, UpdatePerformanceEvaluationDto updateDto);
         Task<bool> DeleteAsync(int id);

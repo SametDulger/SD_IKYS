@@ -8,7 +8,7 @@ namespace SD_IKYS.Business.Interfaces
     public interface ITrainingService
     {
         Task<IEnumerable<TrainingDto>> GetAllAsync();
-        Task<TrainingDto> GetByIdAsync(int id);
+        Task<TrainingDto?> GetByIdAsync(int id);
         Task<TrainingDto> CreateAsync(CreateTrainingDto createTrainingDto);
         Task<TrainingDto> UpdateAsync(int id, UpdateTrainingDto updateTrainingDto);
         Task<bool> DeleteAsync(int id);

@@ -7,7 +7,7 @@ namespace SD_IKYS.Business.Interfaces
     public interface IEmployeeService
     {
         Task<IEnumerable<EmployeeDto>> GetAllAsync();
-        Task<EmployeeDto> GetByIdAsync(int id);
+        Task<EmployeeDto?> GetByIdAsync(int id);
         Task<EmployeeDto> CreateAsync(CreateEmployeeDto createEmployeeDto);
         Task<EmployeeDto> UpdateAsync(int id, UpdateEmployeeDto updateEmployeeDto);
         Task<bool> DeleteAsync(int id);

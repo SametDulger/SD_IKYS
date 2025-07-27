@@ -8,7 +8,7 @@ namespace SD_IKYS.Business.Interfaces
     public interface ILeaveRequestService
     {
         Task<IEnumerable<LeaveRequestDto>> GetAllAsync();
-        Task<LeaveRequestDto> GetByIdAsync(int id);
+        Task<LeaveRequestDto?> GetByIdAsync(int id);
         Task<LeaveRequestDto> CreateAsync(CreateLeaveRequestDto createLeaveRequestDto);
         Task<LeaveRequestDto> UpdateAsync(int id, UpdateLeaveRequestDto updateLeaveRequestDto);
         Task<bool> DeleteAsync(int id);

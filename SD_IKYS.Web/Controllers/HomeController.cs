@@ -16,6 +16,13 @@ namespace SD_IKYS.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
+            // Authentication kontrolü
+            var username = HttpContext.Session.GetString("Username");
+            if (string.IsNullOrEmpty(username))
+            {
+                return RedirectToAction("Login", "Users");
+            }
+
             try
             {
                 // Dashboard için istatistikleri API'den al
@@ -147,6 +154,13 @@ namespace SD_IKYS.Web.Controllers
 
         public IActionResult Privacy()
         {
+            // Authentication kontrolü
+            var username = HttpContext.Session.GetString("Username");
+            if (string.IsNullOrEmpty(username))
+            {
+                return RedirectToAction("Login", "Users");
+            }
+            
             return View();
         }
 

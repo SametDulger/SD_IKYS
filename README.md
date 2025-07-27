@@ -1,348 +1,253 @@
 # SD IKYS - İnsan Kaynakları Yönetim Sistemi
 
-## ⚠️ Geliştirme Aşamasında
+Bu proje, modern .NET 9.0 teknolojileri kullanılarak geliştirilmiş kapsamlı bir İnsan Kaynakları Yönetim Sistemidir.
 
-**Bu proje aktif geliştirme aşamasındadır ve henüz production ortamı için hazır değildir.**
+## 🚀 Özellikler
 
-### Önemli Notlar
+### 👥 Kullanıcı Yönetimi
+- Kullanıcı kayıt ve giriş sistemi
+- Rol tabanlı yetkilendirme (Admin, Manager, Employee, HR)
+- Kullanıcı profil yönetimi
 
-- **Geliştirme Durumu**: Proje şu anda beta aşamasındadır
-- **Eksik Özellikler**: Bazı modüller henüz tamamlanmamış olabilir
-- **Hata Riski**: Geliştirme sürecinde beklenmeyen hatalar oluşabilir
-- **API Değişiklikleri**: API endpoint'leri geliştirme sürecinde değişebilir
-- **Veritabanı Şeması**: Migration'lar güncellenebilir
+### 👨‍💼 Personel Yönetimi
+- Personel kayıt ve bilgi yönetimi
+- Departman ve pozisyon takibi
+- Maaş bilgileri
+- Hiyerarşik yapı (Yönetici-Çalışan ilişkisi)
 
-### Öneriler
+### 📅 İzin Yönetimi
+- İzin talep sistemi
+- Onay süreçleri
+- İzin geçmişi takibi
+- Farklı izin türleri
 
-- Sadece geliştirme ve test ortamlarında kullanın
-- Production verilerinizi bu sistemle test etmeyin
-- Düzenli olarak güncellemeleri kontrol edin
-- Sorun yaşarsanız GitHub Issues üzerinden bildirin
+### 📊 Performans Değerlendirme
+- Çalışan performans değerlendirmeleri
+- Kriter bazlı puanlama
+- Hedef belirleme ve takip
+- Raporlama
 
----
+### 🎓 Eğitim Yönetimi
+- Eğitim programları
+- Katılımcı yönetimi
+- Sertifika takibi
+- Eğitim sonuçları
 
-## Genel Bakış
+## 🏗️ Mimari
 
-SD IKYS, modern kurumsal ihtiyaçlar için geliştirilmiş kapsamlı bir İnsan Kaynakları Yönetim Sistemidir. SOLID prensiplerine uygun, çok katmanlı mimari ile tasarlanmış bu sistem, personel yönetiminden performans değerlendirmesine kadar tüm HR süreçlerini dijitalleştirir.
-
-### Temel Avantajlar
-
-- **Çok Katmanlı Mimari**: SOLID prensiplerine uygun, sürdürülebilir kod yapısı
-- **RESTful API**: Modern web standartlarına uygun API tasarımı
-- **Responsive UI**: Bootstrap ile mobil uyumlu arayüz
-- **Otomatik Migration**: Veritabanı şeması otomatik güncelleme
-- **Swagger Desteği**: API dokümantasyonu ve test arayüzü
-
-## Özellikler
-
-### Personel Yönetimi
-- Personel kayıt ve profil yönetimi
-- TCKN bazlı benzersiz kimlik doğrulama
-- Departman ve pozisyon yönetimi
-- Yöneticilik hiyerarşisi
-- Aktif/pasif personel durumu
-- Departmana göre filtreleme
-
-### İzin Yönetimi
-- İzin talebi oluşturma ve takip
-- Onaylama/reddetme süreci
-- İzin türü kategorileri (Yıllık, Hastalık, Ücretsiz)
-- Bekleyen izinler listesi
-- Personele göre izin geçmişi
-- Onay notları ve tarih takibi
-
-### Performans Değerlendirme
-- Çok kriterli performans değerlendirmesi
-- Değerlendirici atama sistemi
-- Dönemsel değerlendirme (Q1, Q2, Q3, Q4, Yıllık)
-- Yüksek performanslı personel tespiti
-- Güçlü yönler ve gelişim alanları
-- Detaylı raporlama
-
-### Eğitim Yönetimi
-- Eğitim programı oluşturma
-- Eğitim türü kategorileri (İç, Dış, Online)
-- Eğitmen ve konum yönetimi
-- Katılımcı kapasitesi kontrolü
-- Aktif, tamamlanan, yaklaşan eğitimler
-- Eğitmene göre filtreleme
-
-### Eğitim Katılımcıları
-- Katılımcı kayıt sistemi
-- Eğitim puanlama ve sertifika
-- Katılım durumu takibi
-- Eğitim tamamlanma tarihi
-- Personele göre eğitim geçmişi
-
-### Kullanıcı ve Rol Yönetimi
-- Kullanıcı hesap yönetimi
-- Rol tabanlı yetkilendirme
-- Giriş/çıkış işlemleri
-- Aktif/pasif kullanıcı durumu
-- Güvenli oturum yönetimi
-
-## Mimari
+Proje Clean Architecture prensiplerine uygun olarak geliştirilmiştir:
 
 ```
 SD_IKYS/
-├── SD_IKYS.Core/           # Domain Layer
-│   ├── Entities/           # Domain Models
-│   ├── DTOs/              # Data Transfer Objects
-│   └── Interfaces/        # Repository & Service Contracts
-├── SD_IKYS.Data/          # Data Access Layer
-│   ├── Repositories/      # Repository Implementations
-│   ├── Migrations/        # Database Migrations
-│   └── ApplicationDbContext.cs
-├── SD_IKYS.Business/      # Business Logic Layer
-│   ├── Services/          # Business Services
-│   └── Interfaces/        # Service Contracts
-├── SD_IKYS.API/           # API Layer
-│   └── Controllers/       # REST API Controllers
-└── SD_IKYS.Web/           # Presentation Layer
-    ├── Controllers/       # MVC Controllers
-    ├── Views/            # Razor Views
-    ├── Models/           # View Models
-    └── Services/         # API Communication
+├── SD_IKYS.Core/          # Domain entities, interfaces, DTOs
+├── SD_IKYS.Data/          # Data access layer, repositories
+├── SD_IKYS.Business/      # Business logic, services
+├── SD_IKYS.API/           # REST API
+└── SD_IKYS.Web/           # Web UI (MVC)
 ```
 
-### Veri Akışı
+### Teknolojiler
 
-```
-Web UI → API Layer → Business Layer → Core Layer → Data Layer → Database
-   ↑                                                               ↓
-   └────────────────────── Response Flow ←─────────────────────────┘
-```
+- **Backend**: .NET 9.0, Entity Framework Core
+- **Database**: SQL Server
+- **API**: ASP.NET Core Web API
+- **Frontend**: ASP.NET Core MVC, Bootstrap 5
+- **Authentication**: Session-based
+- **Architecture**: Clean Architecture, Repository Pattern
 
-## Teknolojiler
-
-### Backend
-- **.NET 9.0** - Modern .NET platformu
-- **ASP.NET Core Web API** - RESTful API framework
-- **Entity Framework Core 9.0.7** - ORM ve veritabanı erişimi
-- **SQL Server** - İlişkisel veritabanı
-- **Swagger/OpenAPI 9.0.3** - API dokümantasyonu
-
-### Frontend
-- **ASP.NET Core MVC** - Web framework
-- **Razor Views** - View engine
-- **Bootstrap 5.3.3** - CSS framework
-- **jQuery 3.7.1** - JavaScript library
-- **Font Awesome 6.0.0** - Icon library
-
-### Diğer
-- **CORS** - Cross-origin resource sharing
-- **Session Management** - Kullanıcı oturum yönetimi
-- **Dependency Injection** - IoC container
-- **Repository Pattern** - Veri erişim deseni
-- **Unit of Work** - Transaction yönetimi
-
-## Kurulum
+## 🛠️ Kurulum
 
 ### Gereksinimler
 
-- [.NET 9.0 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
-- [SQL Server 2019+](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
-- [Visual Studio 2022](https://visualstudio.microsoft.com/) veya [VS Code](https://code.visualstudio.com/)
+- .NET 9.0 SDK
+- SQL Server (Express veya üzeri)
+- Visual Studio 2022 veya VS Code
 
-### Adım 1: Projeyi İndirin
+### Adımlar
 
-```bash
-git clone https://github.com/SametDulger/SD_IKYS.git
-cd SD_IKYS
-```
+1. **Repository'yi klonlayın**
+   ```bash
+   git clone https://github.com/your-username/SD_IKYS.git
+   cd SD_IKYS
+   ```
 
-### Adım 2: Veritabanı Bağlantısını Ayarlayın
+2. **Veritabanı bağlantısını yapılandırın**
+   
+   `SD_IKYS.API/appsettings.json` ve `SD_IKYS.Web/appsettings.json` dosyalarında connection string'i güncelleyin:
+   ```json
+   {
+     "ConnectionStrings": {
+       "DefaultConnection": "Server=YOUR_SERVER;Database=SD_IKYS_DB;Trusted_Connection=true;MultipleActiveResultSets=true;TrustServerCertificate=True"
+     }
+   }
+   ```
 
-`SD_IKYS.API/appsettings.json` dosyasını düzenleyin:
+3. **Migration'ları çalıştırın**
+   ```bash
+   cd SD_IKYS.API
+   dotnet ef database update
+   ```
 
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Database=SD_IKYS;Trusted_Connection=true;TrustServerCertificate=True;"
-  }
-}
-```
+4. **Projeyi çalıştırın**
+   
+   **API için:**
+   ```bash
+   dotnet run --project SD_IKYS.API
+   ```
+   
+   **Web UI için:**
+   ```bash
+   dotnet run --project SD_IKYS.Web
+   ```
 
-### Adım 3: Migration Oluşturun ve Veritabanını Güncelleyin
+## 🔐 Varsayılan Kullanıcılar
 
-```bash
-cd SD_IKYS.API
+Sistem ilk çalıştırıldığında aşağıdaki kullanıcılar otomatik olarak oluşturulur:
 
-# İlk migration oluşturun (eğer yoksa)
-dotnet ef migrations add InitialCreate
+| Kullanıcı Adı | Şifre | Rol | Açıklama |
+|---------------|-------|-----|----------|
+| admin | 123456 | Admin | Sistem yöneticisi |
+| manager | 123456 | Manager | Yönetici |
+| employee | 123456 | Employee | Çalışan |
 
-# Veritabanını güncelleyin
-dotnet ef database update
-```
+## 📋 API Endpoints
 
-### Adım 4: Projeyi Çalıştırın
+### Kullanıcılar
+- `GET /api/users` - Tüm kullanıcıları listele
+- `GET /api/users/{id}` - Kullanıcı detayı
+- `POST /api/users` - Yeni kullanıcı oluştur
+- `PUT /api/users/{id}` - Kullanıcı güncelle
+- `DELETE /api/users/{id}` - Kullanıcı sil
+- `POST /api/users/login` - Giriş yap
 
-**API Projesi:**
-```bash
-cd SD_IKYS.API
-dotnet run
-```
-API varsayılan olarak `http://localhost:5214` adresinde çalışır.
+### Roller
+- `GET /api/roles` - Tüm rolleri listele
+- `GET /api/roles/{id}` - Rol detayı
+- `POST /api/roles` - Yeni rol oluştur
+- `PUT /api/roles/{id}` - Rol güncelle
+- `DELETE /api/roles/{id}` - Rol sil
 
-**Web Projesi:**
-```bash
-cd SD_IKYS.Web
-dotnet run
-```
-Web arayüzü varsayılan olarak `http://localhost:5283` adresinde çalışır.
+### Çalışanlar
+- `GET /api/employees` - Tüm çalışanları listele
+- `GET /api/employees/{id}` - Çalışan detayı
+- `POST /api/employees` - Yeni çalışan oluştur
+- `PUT /api/employees/{id}` - Çalışan güncelle
+- `DELETE /api/employees/{id}` - Çalışan sil
 
-## Kullanım
+### İzin Talepleri
+- `GET /api/leaverequests` - Tüm izin taleplerini listele
+- `GET /api/leaverequests/{id}` - İzin talebi detayı
+- `POST /api/leaverequests` - Yeni izin talebi oluştur
+- `PUT /api/leaverequests/{id}` - İzin talebi güncelle
+- `DELETE /api/leaverequests/{id}` - İzin talebi sil
 
-### İlk Giriş
+### Performans Değerlendirmeleri
+- `GET /api/performanceevaluations` - Tüm değerlendirmeleri listele
+- `GET /api/performanceevaluations/{id}` - Değerlendirme detayı
+- `POST /api/performanceevaluations` - Yeni değerlendirme oluştur
+- `PUT /api/performanceevaluations/{id}` - Değerlendirme güncelle
+- `DELETE /api/performanceevaluations/{id}` - Değerlendirme sil
 
-1. Web arayüzüne gidin: `http://localhost:5283`
-2. **Roller** menüsünden yeni rol oluşturun
-3. **Kullanıcılar** menüsünden ilk kullanıcıyı oluşturun
-4. Oluşturduğunuz kullanıcı ile giriş yapın
+### Eğitimler
+- `GET /api/trainings` - Tüm eğitimleri listele
+- `GET /api/trainings/{id}` - Eğitim detayı
+- `POST /api/trainings` - Yeni eğitim oluştur
+- `PUT /api/trainings/{id}` - Eğitim güncelle
+- `DELETE /api/trainings/{id}` - Eğitim sil
 
-### Ana Dashboard
+### Eğitim Katılımcıları
+- `GET /api/trainingparticipants` - Tüm katılımcıları listele
+- `GET /api/trainingparticipants/{id}` - Katılımcı detayı
+- `POST /api/trainingparticipants` - Yeni katılımcı ekle
+- `PUT /api/trainingparticipants/{id}` - Katılımcı güncelle
+- `DELETE /api/trainingparticipants/{id}` - Katılımcı sil
 
-Dashboard'da şu bilgiler görüntülenir:
-- Toplam ve aktif personel sayısı
-- Bekleyen izin talepleri
-- Aktif eğitimler
-- Son performans değerlendirmeleri
+## 🎨 Web Arayüzü
 
-### Hızlı İşlemler
+Web arayüzü aşağıdaki özellikleri içerir:
 
-Dashboard'dan hızlıca erişebileceğiniz işlemler:
-- Yeni personel ekleme
-- İzin talebi oluşturma
-- Performans değerlendirmesi
-- Yeni eğitim oluşturma
+- **Responsive Design**: Bootstrap 5 ile mobil uyumlu
+- **Modern UI**: Font Awesome ikonları
+- **Kullanıcı Dostu**: Kolay navigasyon
+- **Session Yönetimi**: Güvenli oturum yönetimi
+- **Form Validasyonu**: Client-side ve server-side validasyon
 
-## API Dokümantasyonu
+## 🔧 Geliştirme
 
-### Swagger UI
+### Yeni Entity Ekleme
 
-API dokümantasyonuna erişmek için:
-```
-http://localhost:5214/swagger
-```
+1. `SD_IKYS.Core/Entities/` klasöründe entity oluşturun
+2. `SD_IKYS.Core/DTOs/` klasöründe DTO'ları oluşturun
+3. `SD_IKYS.Core/Interfaces/` klasöründe repository interface'i oluşturun
+4. `SD_IKYS.Data/Repositories/` klasöründe repository implementasyonu oluşturun
+5. `SD_IKYS.Business/Interfaces/` klasöründe service interface'i oluşturun
+6. `SD_IKYS.Business/Services/` klasöründe service implementasyonu oluşturun
+7. `SD_IKYS.API/Controllers/` klasöründe API controller oluşturun
+8. `SD_IKYS.Web/Controllers/` klasöründe MVC controller oluşturun
+9. `SD_IKYS.Web/Models/` klasöründe ViewModel'leri oluşturun
+10. `SD_IKYS.Web/Views/` klasöründe view'ları oluşturun
 
-### Temel Endpoint'ler
+### Migration Oluşturma
 
-| Modül | Endpoint | Açıklama |
-|-------|----------|----------|
-| Personel | `GET /api/employees` | Tüm personeli listele |
-| İzin | `GET /api/leaverequests` | İzin taleplerini listele |
-| Performans | `GET /api/performanceevaluations` | Değerlendirmeleri listele |
-| Eğitim | `GET /api/trainings` | Eğitimleri listele |
-| Kullanıcı | `GET /api/users` | Kullanıcıları listele |
-
-### Örnek API Kullanımı
-
-```bash
-# Personel listesi
-curl -X GET "http://localhost:5214/api/employees"
-
-# Yeni personel ekleme
-curl -X POST "http://localhost:5214/api/employees" \
-  -H "Content-Type: application/json" \
-  -d '{"firstName":"Ahmet","lastName":"Yılmaz","tckn":"12345678901"}'
-```
-
-## Geliştirme
-
-### Proje Yapısı
-
-```bash
-# Solution'ı açın
-dotnet sln SD_IKYS.sln
-
-# Tüm projeleri derleyin
-dotnet build
-```
-
-### Migration İşlemleri
-
-#### İlk Migration Oluşturma
-```bash
-cd SD_IKYS.API
-dotnet ef migrations add InitialCreate
-dotnet ef database update
-```
-
-#### Yeni Migration Oluşturma
 ```bash
 cd SD_IKYS.API
 dotnet ef migrations add MigrationName
 dotnet ef database update
 ```
 
-#### Migration'ları Listeleme
-```bash
-cd SD_IKYS.API
-dotnet ef migrations list
-```
+## 🧪 Test
 
-#### Migration'ları Geri Alma
-```bash
-cd SD_IKYS.API
-dotnet ef database update PreviousMigrationName
-```
+Proje şu anda test projeleri içermemektedir. Gelecek sürümlerde unit test ve integration test projeleri eklenecektir.
 
-#### Migration'ları Silme
-```bash
-cd SD_IKYS.API
-dotnet ef migrations remove
-```
+## 📝 Lisans
 
-#### Veritabanını Sıfırlama
-```bash
-cd SD_IKYS.API
-dotnet ef database drop --force
-dotnet ef database update
-```
+Bu proje MIT lisansı altında lisanslanmıştır.
 
-### Kod Standartları
+## 🤝 Katkıda Bulunma
 
-- **C# Coding Conventions** - Microsoft standartları
-- **SOLID Principles** - Temiz kod prensipleri
-- **Repository Pattern** - Veri erişim deseni
-- **Dependency Injection** - Bağımlılık enjeksiyonu
-
-## Katkı
-
-1. Bu repository'yi fork edin
-2. Feature branch oluşturun (`git checkout -b feature/amazing-feature`)
-3. Değişikliklerinizi commit edin (`git commit -m 'Add amazing feature'`)
-4. Branch'inizi push edin (`git push origin feature/amazing-feature`)
+1. Fork yapın
+2. Feature branch oluşturun (`git checkout -b feature/AmazingFeature`)
+3. Commit yapın (`git commit -m 'Add some AmazingFeature'`)
+4. Push yapın (`git push origin feature/AmazingFeature`)
 5. Pull Request oluşturun
 
-### Katkı Öncesi Kontrol Listesi
+## 📞 İletişim
 
-- [ ] Kod standartlarına uygunluk
-- [ ] API dokümantasyonunun güncellenmesi
-- [ ] README dosyasının güncellenmesi
-- [ ] Geliştirme aşamasındaki özelliklerin belirtilmesi
-- [ ] Bilinen hataların dokümante edilmesi
+Proje hakkında sorularınız için issue açabilir veya pull request gönderebilirsiniz.
 
-## Bilinen Sorunlar ve Sınırlamalar
+## 🔄 Sürüm Geçmişi
 
-### Mevcut Durum
-- **Kullanıcı Arayüzü**: Bazı sayfalar henüz responsive tasarıma tam uyumlu değil
-- **Performans**: Büyük veri setlerinde performans optimizasyonu gerekli
-- **Güvenlik**: Ek güvenlik katmanları eklenmesi planlanıyor
-- **Raporlama**: Detaylı raporlama modülü geliştirme aşamasında
-- **Bildirimler**: Email/SMS bildirim sistemi henüz entegre edilmedi
+### v1.0.0 (2025-01-16)
+- İlk sürüm
+- Temel CRUD işlemleri
+- Kullanıcı yönetimi
+- Personel yönetimi
+- İzin yönetimi
+- Performans değerlendirme
+- Eğitim yönetimi
+- Web arayüzü
+- REST API
 
-### Gelecek Güncellemeler
-- [ ] Gelişmiş arama ve filtreleme özellikleri
-- [ ] Dashboard widget'ları ve grafikler
-- [ ] Excel/PDF export fonksiyonları
-- [ ] Çoklu dil desteği
-- [ ] Mobil uygulama desteği
-- [ ] Webhook entegrasyonları
+## 🚧 Bilinen Sorunlar
 
----
+- Unit testler henüz yazılmamış
+- Logging sistemi henüz implement edilmemiş
+- Caching mekanizması henüz eklenmemiş
+- Role-based authorization henüz tam implement edilmemiş
 
-## Lisans
+## 🔮 Gelecek Planları
 
-Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakın.
+- [x] JWT Authentication
+- [x] Şifre hash'leme
+- [ ] Unit testler
+- [ ] Integration testler
+- [ ] Logging sistemi
+- [ ] Caching mekanizması
+- [ ] Role-based authorization
+- [ ] Email bildirimleri
+- [ ] Raporlama sistemi
+- [ ] Dashboard
+- [ ] Mobile app
+- [ ] Docker support
+- [ ] CI/CD pipeline
 
