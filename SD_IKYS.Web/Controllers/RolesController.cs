@@ -29,12 +29,12 @@ namespace SD_IKYS.Web.Controllers
 
         public IActionResult Create()
         {
-            return View(new RoleViewModel());
+            return View(new RoleCreateViewModel());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(RoleViewModel roleViewModel)
+        public async Task<IActionResult> Create(RoleCreateViewModel roleViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +81,16 @@ namespace SD_IKYS.Web.Controllers
                     TempData["Error"] = "Rol bulunamadı.";
                     return RedirectToAction(nameof(Index));
                 }
-                return View(role);
+
+                var editViewModel = new RoleEditViewModel
+                {
+                    Id = role.Id,
+                    Name = role.Name,
+                    Description = role.Description,
+                    IsActive = role.IsActive
+                };
+
+                return View(editViewModel);
             }
             catch (Exception ex)
             {
@@ -92,7 +101,7 @@ namespace SD_IKYS.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, RoleViewModel roleViewModel)
+        public async Task<IActionResult> Edit(int id, RoleEditViewModel roleViewModel)
         {
             if (ModelState.IsValid)
             {

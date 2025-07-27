@@ -24,7 +24,7 @@ namespace SD_IKYS.Business.Services
             return employees.Select(MapToDto);
         }
 
-        public async Task<EmployeeDto> GetByIdAsync(int id)
+        public async Task<EmployeeDto?> GetByIdAsync(int id)
         {
             var employee = await _unitOfWork.Employees.GetByIdAsync(id);
             return employee != null ? MapToDto(employee) : null;
@@ -159,9 +159,9 @@ namespace SD_IKYS.Business.Services
                 Department = employee.Department,
                 Salary = employee.Salary,
                 ManagerId = employee.ManagerId,
-                ManagerName = employee.Manager != null ? $"{employee.Manager.FirstName} {employee.Manager.LastName}" : null,
+                ManagerName = employee.Manager != null ? $"{employee.Manager.FirstName} {employee.Manager.LastName}" : string.Empty,
                 UserId = employee.UserId,
-                UserName = employee.User != null ? employee.User.Username : null,
+                UserName = employee.User?.Username ?? string.Empty,
                 IsActive = employee.IsActive
             };
         }

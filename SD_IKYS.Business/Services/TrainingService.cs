@@ -24,7 +24,7 @@ namespace SD_IKYS.Business.Services
             return trainings.Select(MapToDto);
         }
 
-        public async Task<TrainingDto> GetByIdAsync(int id)
+        public async Task<TrainingDto?> GetByIdAsync(int id)
         {
             var training = await _unitOfWork.Trainings.GetByIdAsync(id);
             return training != null ? MapToDto(training) : null;
@@ -161,9 +161,10 @@ namespace SD_IKYS.Business.Services
                 MaxParticipants = training.MaxParticipants,
                 Status = training.Status,
                 UserId = training.UserId,
-                UserName = training.User != null ? training.User.Username : null,
+                UserName = training.User?.Username ?? string.Empty,
                 IsActive = training.IsActive,
-                ParticipantCount = training.Participants?.Count ?? 0
+                CreatedDate = training.CreatedDate,
+                UpdatedDate = training.UpdatedDate
             };
         }
     }

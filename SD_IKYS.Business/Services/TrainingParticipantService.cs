@@ -24,7 +24,7 @@ namespace SD_IKYS.Business.Services
             return participants.Select(MapToDto);
         }
 
-        public async Task<TrainingParticipantDto> GetByIdAsync(int id)
+        public async Task<TrainingParticipantDto?> GetByIdAsync(int id)
         {
             var participant = await _unitOfWork.TrainingParticipants.GetByIdAsync(id);
             return participant != null ? MapToDto(participant) : null;
@@ -159,9 +159,9 @@ namespace SD_IKYS.Business.Services
             {
                 Id = participant.Id,
                 TrainingId = participant.TrainingId,
-                TrainingTitle = participant.Training?.Title,
+                TrainingTitle = participant.Training?.Title ?? string.Empty,
                 EmployeeId = participant.EmployeeId,
-                EmployeeName = participant.Employee != null ? $"{participant.Employee.FirstName} {participant.Employee.LastName}" : null,
+                EmployeeName = participant.Employee != null ? $"{participant.Employee.FirstName} {participant.Employee.LastName}" : string.Empty,
                 Status = participant.Status,
                 Score = participant.Score,
                 CompletionDate = participant.CompletionDate,

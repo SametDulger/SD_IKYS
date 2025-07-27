@@ -24,7 +24,7 @@ namespace SD_IKYS.Business.Services
             return evaluations.Select(MapToDto);
         }
 
-        public async Task<PerformanceEvaluationDto> GetByIdAsync(int id)
+        public async Task<PerformanceEvaluationDto?> GetByIdAsync(int id)
         {
             var evaluation = await _unitOfWork.PerformanceEvaluations.GetByIdAsync(id);
             return evaluation != null ? MapToDto(evaluation) : null;
@@ -189,11 +189,11 @@ namespace SD_IKYS.Business.Services
             {
                 Id = evaluation.Id,
                 EmployeeId = evaluation.EmployeeId,
-                EmployeeName = evaluation.Employee != null ? $"{evaluation.Employee.FirstName} {evaluation.Employee.LastName}" : null,
+                EmployeeName = evaluation.Employee != null ? $"{evaluation.Employee.FirstName} {evaluation.Employee.LastName}" : string.Empty,
                 UserId = evaluation.UserId,
-                UserName = evaluation.User != null ? evaluation.User.Username : null,
+                UserName = evaluation.User?.Username ?? string.Empty,
                 EvaluatorId = evaluation.EvaluatorId,
-                EvaluatorName = evaluation.Evaluator != null ? $"{evaluation.Evaluator.FirstName} {evaluation.Evaluator.LastName}" : null,
+                EvaluatorName = evaluation.Evaluator != null ? $"{evaluation.Evaluator.FirstName} {evaluation.Evaluator.LastName}" : string.Empty,
                 EvaluationDate = evaluation.EvaluationDate,
                 EvaluationPeriod = evaluation.EvaluationPeriod,
                 WorkQuality = evaluation.WorkQuality,
