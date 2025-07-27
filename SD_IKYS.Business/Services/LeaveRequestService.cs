@@ -24,7 +24,7 @@ namespace SD_IKYS.Business.Services
             return leaveRequests.Select(MapToDto);
         }
 
-        public async Task<LeaveRequestDto> GetByIdAsync(int id)
+        public async Task<LeaveRequestDto?> GetByIdAsync(int id)
         {
             var leaveRequest = await _unitOfWork.LeaveRequests.GetByIdAsync(id);
             return leaveRequest != null ? MapToDto(leaveRequest) : null;
@@ -169,16 +169,16 @@ namespace SD_IKYS.Business.Services
             {
                 Id = leaveRequest.Id,
                 EmployeeId = leaveRequest.EmployeeId,
-                EmployeeName = leaveRequest.Employee != null ? $"{leaveRequest.Employee.FirstName} {leaveRequest.Employee.LastName}" : null,
+                EmployeeName = leaveRequest.Employee != null ? $"{leaveRequest.Employee.FirstName} {leaveRequest.Employee.LastName}" : string.Empty,
                 UserId = leaveRequest.UserId,
-                UserName = leaveRequest.User != null ? leaveRequest.User.Username : null,
+                UserName = leaveRequest.User?.Username ?? string.Empty,
                 StartDate = leaveRequest.StartDate,
                 EndDate = leaveRequest.EndDate,
                 LeaveType = leaveRequest.LeaveType,
                 Reason = leaveRequest.Reason,
                 Status = leaveRequest.Status,
                 ApproverId = leaveRequest.ApproverId,
-                ApproverName = leaveRequest.Approver != null ? $"{leaveRequest.Approver.FirstName} {leaveRequest.Approver.LastName}" : null,
+                ApproverName = leaveRequest.Approver != null ? $"{leaveRequest.Approver.FirstName} {leaveRequest.Approver.LastName}" : string.Empty,
                 ApprovalDate = leaveRequest.ApprovalDate,
                 ApprovalNotes = leaveRequest.ApprovalNotes,
                 IsActive = leaveRequest.IsActive

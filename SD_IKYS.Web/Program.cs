@@ -9,6 +9,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<IApiService, ApiService>();
 
+// Web projesi sadece API kullanacak, Business ve Data katmanlarına doğrudan erişim yok
+
 // Add Session
 builder.Services.AddSession(options =>
 {
